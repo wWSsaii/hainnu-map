@@ -23,9 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # 只上传真正要发布的 index.html（避免把 uploads/ 几十 MB 原图一起打包进部署产物）
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'index.html'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
