@@ -23,10 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      # 只上传真正要发布的 index.html（避免把 uploads/ 几十 MB 原图一起打包进部署产物）
+      # upload-pages-artifact 强制要求 path 是一个目录（不能是单文件，会报 "not a directory"）。
+      # main 分支只含 index.html + .github，体积很小，直接用仓库根目录 '.' 即可。
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: 'index.html'
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
